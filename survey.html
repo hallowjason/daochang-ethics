@@ -177,8 +177,8 @@
         db.ref(DB_PATH_WORDCLOUD).push({ words: text, timestamp: Date.now() })
       );
 
-      Promise.all(promises)
-        .then(() => showSuccess())
+      Promise.all(promises.map(p => Promise.resolve(p)))
+        .then(() => setTimeout(showSuccess, 0))
         .catch(err => {
           btn.disabled = false;
           btn.textContent = '送出關鍵字';
@@ -198,8 +198,8 @@
       btn.disabled = true;
       btn.textContent = '送出中…';
 
-      db.ref(DB_PATH_LETTERS).push({ text: content, timestamp: Date.now() })
-        .then(() => showSuccess())
+      Promise.resolve(db.ref(DB_PATH_LETTERS).push({ text: content, timestamp: Date.now() }))
+        .then(() => setTimeout(showSuccess, 0))
         .catch(err => {
           btn.disabled = false;
           btn.textContent = '送出心聲';
@@ -208,12 +208,12 @@
     }
 
     function showSuccess() {
-      document.getElementById('wordcloud-form').classList.add('hidden');
-      document.getElementById('letter-form').classList.add('hidden');
-      document.getElementById('message').innerHTML = `
-        <span class="success-icon">✓</span>
-        <div style="color:#2e7d32; font-size:1.3rem">提交成功！</div>
-        <p>感謝您的參與，請抬頭看大螢幕。</p>
+      document.querySelector('.container').innerHTML = `
+        <div style="text-align:center; padding: 2rem 1rem;">
+          <div style="font-size:5rem; color:#2e7d32; margin-bottom:1.2rem; line-height:1;">✓</div>
+          <div style="color:#2e7d32; font-size:1.5rem; font-weight:bold; margin-bottom:1rem;">提交成功！</div>
+          <p style="color:#555; font-size:1.1rem; line-height:1.8; margin:0;">感謝您的參與，<br>請抬頭看大螢幕。</p>
+        </div>
       `;
     }
   </script>
