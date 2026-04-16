@@ -458,6 +458,9 @@
       .then(data => {
         window.PRESENTATION_META = data.meta;
         renderSlides(data.slides);
+        // 深色 compare 頁標記（slide id=17 → data-idx=16）
+        const darkCompare = document.querySelector('.slide[data-idx="16"]');
+        if (darkCompare) darkCompare.classList.add('dark-compare');
         document.dispatchEvent(new Event('slides-ready'));
       })
       .catch(err => {

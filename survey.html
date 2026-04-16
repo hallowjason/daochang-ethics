@@ -136,6 +136,12 @@
 
   <script src="firebase-config.js"></script>
   <script>
+    // ── Firebase 初始化 ──
+    if (!firebase.apps.length) {
+      firebase.initializeApp(FIREBASE_CONFIG);
+    }
+    const db = firebase.database();
+
     const params = new URLSearchParams(window.location.search);
     const mode = params.get('mode');
 
@@ -150,7 +156,7 @@
       document.getElementById('message').innerText = '無效的連結。請掃描投影片上的 QR Code。';
     }
 
-    // 提交文字雲
+    // 提交文字雲（路徑對應 firebase-config.js DB_PATH_WORDCLOUD）
     function submitWordCloud() {
       const inputs = [
         document.getElementById('wc1').value.trim(),
@@ -163,20 +169,24 @@
         return;
       }
 
-      const db = firebase.database();
-      const promises = inputs.map(text => {
-        return db.ref('wordcloud_entries').push({
-          text: text,
-          timestamp: Date.now()
-        });
-      });
+      const btn = document.querySelector('#wordcloud-form button');
+      btn.disabled = true;
+      btn.textContent = '送出中…';
+
+      const promises = inputs.map(text =>
+        db.ref(DB_PATH_WORDCLOUD).push({ words: text, timestamp: Date.now() })
+      );
 
       Promise.all(promises)
         .then(() => showSuccess())
-        .catch(err => alert('提交失敗：' + err.message));
+        .catch(err => {
+          btn.disabled = false;
+          btn.textContent = '送出關鍵字';
+          alert('提交失敗：' + err.message);
+        });
     }
 
-    // 提交信件
+    // 提交信件（路徑對應 firebase-config.js DB_PATH_LETTERS）
     function submitLetter() {
       const content = document.getElementById('letter-content').value.trim();
       if (!content) {
@@ -184,13 +194,17 @@
         return;
       }
 
-      const db = firebase.database();
-      db.ref('letter_entries').push({
-        content: content,
-        timestamp: Date.now()
-      })
-      .then(() => showSuccess())
-      .catch(err => alert('提交失敗：' + err.message));
+      const btn = document.querySelector('#letter-form button');
+      btn.disabled = true;
+      btn.textContent = '送出中…';
+
+      db.ref(DB_PATH_LETTERS).push({ text: content, timestamp: Date.now() })
+        .then(() => showSuccess())
+        .catch(err => {
+          btn.disabled = false;
+          btn.textContent = '送出心聲';
+          alert('提交失敗：' + err.message);
+        });
     }
 
     function showSuccess() {
