@@ -18,6 +18,8 @@ const FIREBASE_CONFIG = {
 // Survey 網址（deploy 到 GitHub Pages 後更新）
 // 格式：https://hallowjason.github.io/daochang-ethics/survey.html
 const SURVEY_BASE_URL = "https://hallowjason.github.io/daochang-ethics/survey.html";
+// 簡報公開網址
+const PRESENTATION_URL = "https://hallowjason.github.io/daochang-ethics/";
 
 // DB 路徑
 const DB_PATH_WORDCLOUD = "/daochang-ethics/wordcloud";

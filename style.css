@@ -1853,3 +1853,293 @@ html, body {
   background-size: cover;
   background-position: center;
 }
+
+/* ═══════════════════════════════════════════════════════
+   PATCH v3 — 顏色 Cascade + 字級 + 佈局全面修正
+   ═══════════════════════════════════════════════════════ */
+
+/* ── 1. 淺色頁：繼承深色文字 ─────────────────────────── */
+.slide-content,
+.slide-compare,
+.slide-cards,
+.slide-table,
+.slide-flow,
+.slide-diagram,
+.slide-stack {
+  color: var(--text-primary) !important;
+}
+.slide-content *,
+.slide-compare *,
+.slide-cards *,
+.slide-table *,
+.slide-flow *,
+.slide-diagram *,
+.slide-stack * {
+  color: inherit;
+}
+/* 淺色頁 accent 補回 */
+.slide-content .title-zh,
+.slide-compare .title-zh,
+.slide-cards .title-zh,
+.slide-table .title-zh,
+.slide-flow .title-zh,
+.slide-diagram .title-zh,
+.slide-stack .title-zh {
+  color: var(--text-primary) !important;
+  font-size: clamp(30px, 3.8vw, 52px) !important;
+}
+.slide-cards .card-label .label-zh { color: var(--accent) !important; }
+.slide-compare .compare-label .label-zh { color: var(--accent) !important; }
+.slide-table .ethics-table td.accent { color: var(--accent) !important; }
+.slide-flow .premise-zh { color: var(--accent) !important; }
+.slide-diagram .circle-left * { color: #faf9f5 !important; }
+.slide-diagram .circle-right * { color: #faf9f5 !important; }
+
+/* ── 2. 深色頁：繼承淺色文字 ─────────────────────────── */
+.slide-cover,
+.slide-chapter,
+.slide-quote,
+.slide-closing,
+.slide-toc,
+.slide-scripture {
+  color: var(--text-on-dark) !important;
+}
+.slide-cover *,
+.slide-chapter *,
+.slide-quote *,
+.slide-closing *,
+.slide-toc *,
+.slide-scripture * {
+  color: inherit;
+}
+/* 深色頁特定 accent/secondary */
+.slide-cover .title-zh,
+.slide-chapter .title-zh,
+.slide-quote .quote-zh,
+.slide-closing .title-zh {
+  color: #faf9f5 !important;
+}
+.slide-chapter .chapter-num-zh,
+.slide-toc .toc-num,
+.slide-scripture .source-zh { color: var(--accent) !important; }
+.slide-cover .subtitle-zh,
+.slide-chapter .intro-zh,
+.slide-closing .tag-zh { color: var(--text-on-dark-2) !important; }
+.slide-quote .quote-source { color: var(--text-tertiary) !important; }
+
+/* ── 3. 互動頁 background ────────────────────────────── */
+.slide-interactive { color: var(--text-on-dark) !important; }
+.slide-interactive * { color: inherit; }
+.slide-interactive .interactive-bingo,
+.slide-interactive:has(.interactive-bingo) {
+  color: var(--text-primary) !important;
+}
+/* bingo 需要淺色背景 */
+.slide-interactive .interactive-bingo {
+  background: var(--bg-light);
+  width: 100%; height: 100%;
+  position: absolute; inset: 0;
+}
+.slide-interactive:has(.interactive-bingo) {
+  background: var(--bg-light) !important;
+}
+.slide-interactive .interactive-bingo * { color: var(--text-primary) !important; }
+.slide-interactive .interactive-bingo .title-zh { font-weight: 700; }
+.slide-interactive .interactive-bingo .bingo-cell { color: var(--text-primary) !important; }
+.slide-interactive .interactive-bingo .cell-zh { color: var(--text-primary) !important; }
+
+/* ── 4. 字級全面放大 ─────────────────────────────────── */
+/* 封面 */
+.slide-cover .title-zh { font-size: clamp(48px, 5.5vw, 80px) !important; }
+.slide-cover .subtitle-zh { font-size: clamp(18px, 2vw, 28px) !important; }
+/* 章節封面 */
+.slide-chapter .title-zh { font-size: clamp(38px, 4.5vw, 64px) !important; }
+.slide-chapter .intro-zh { font-size: clamp(16px, 1.8vw, 24px) !important; }
+/* 金句 */
+.slide-quote .quote-zh { font-size: clamp(36px, 5vw, 76px) !important; }
+/* 目錄 */
+.slide-toc .title-zh { font-size: clamp(22px, 2.5vw, 36px) !important; }
+.toc-zh { font-size: clamp(16px, 1.8vw, 24px) !important; }
+.toc-num { font-size: clamp(28px, 3.5vw, 52px) !important; }
+/* 內文頁 body */
+.body-zh { font-size: clamp(17px, 2vw, 26px) !important; line-height: 2.0; }
+/* 比較頁 body */
+.compare-body .body-zh { font-size: clamp(15px, 1.7vw, 22px) !important; }
+.compare-label .label-zh { font-size: clamp(17px, 2vw, 26px) !important; }
+/* 卡片 */
+.card-label .label-zh { font-size: clamp(20px, 2.2vw, 30px) !important; }
+.card-desc .desc-zh { font-size: clamp(15px, 1.7vw, 21px) !important; }
+/* 經文 */
+.scripture-text-zh { font-size: clamp(16px, 1.8vw, 24px) !important; }
+/* 互動頁 */
+.slide-interactive .title-zh { font-size: clamp(28px, 3.2vw, 48px) !important; }
+.scenario-zh, .q-zh, .inst-zh { font-size: clamp(16px, 1.8vw, 24px) !important; }
+.task-zh { font-size: clamp(15px, 1.7vw, 22px) !important; }
+.cell-zh { font-size: clamp(13px, 1.5vw, 18px) !important; }
+/* 流程 */
+.cond-zh, .act-zh { font-size: clamp(15px, 1.7vw, 21px) !important; }
+.note-zh { font-size: clamp(14px, 1.6vw, 19px) !important; }
+/* 圓環 */
+.circle-label-zh { font-size: clamp(18px, 2vw, 26px) !important; }
+.circle-desc { font-size: clamp(12px, 1.3vw, 16px) !important; }
+/* 前賢堆疊 */
+.stack-text-zh { font-size: clamp(17px, 2vw, 26px) !important; }
+/* 表格 */
+.ethics-table th, .ethics-table td { font-size: clamp(15px, 1.7vw, 21px) !important; }
+
+/* ── 5. 佈局修正 ─────────────────────────────────────── */
+
+/* compare-inner 補高度 */
+.compare-inner {
+  height: 100%;
+  padding: 48px 80px;
+  gap: 20px !important;
+}
+.compare-grid {
+  display: flex !important;
+  flex: 1;
+  gap: 24px !important;
+  min-height: 0;
+}
+.compare-card {
+  flex: 1;
+  background: var(--bg-card) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 28px 28px !important;
+  box-shadow: 0px 0px 0px 1px var(--ring-warm), var(--shadow-whisper) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+}
+/* slide 17 深色比較頁 */
+.slide-compare:nth-child(17) .compare-card,
+.compare-card.dark-theme {
+  background: var(--bg-dark-card) !important;
+  box-shadow: 0px 0px 0px 1px var(--ring-dark) !important;
+}
+
+/* content-inner 高度 */
+.content-inner {
+  height: 100%;
+  padding: 60px 100px !important;
+}
+
+/* cards-inner 高度 */
+.cards-inner {
+  height: 100%;
+  padding: 48px 80px !important;
+}
+.cards-grid {
+  display: flex !important;
+  flex: 1;
+  gap: 20px !important;
+  min-height: 0;
+}
+.card-item {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* stack-inner 高度 */
+.stack-inner {
+  height: 100%;
+  padding: 48px 80px !important;
+}
+
+/* ── 6. 互動頁佈局修正（12 wordcloud、22 bingo、37 letter）── */
+
+/* 通用 interactive-inner 高度 */
+.interactive-inner {
+  height: 100%;
+  padding: 48px 80px !important;
+  gap: 20px !important;
+}
+
+/* Wordcloud + Letter: QR 左、內容右 */
+.firebase-layout {
+  display: flex !important;
+  gap: 40px !important;
+  flex: 1;
+  align-items: stretch;
+  min-height: 0;
+}
+.qr-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+#qr-wordcloud, #qr-letter {
+  background: #fff;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  min-width: 140px;
+  min-height: 140px;
+}
+.qr-label-zh {
+  color: var(--text-on-dark-2) !important;
+  font-size: 13px !important;
+  text-align: center;
+  max-width: 160px;
+}
+.wordcloud-display {
+  flex: 1 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-content: center;
+  align-items: center;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  min-height: 0;
+}
+.wc-word { color: var(--text-on-dark) !important; }
+.letter-wall {
+  flex: 1 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-content: flex-start;
+  padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  overflow: auto;
+}
+
+/* Bingo: 全頁淺色 + 3x3 grid */
+.interactive-bingo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 48px 80px;
+  justify-content: center;
+}
+.bingo-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 14px !important;
+  flex: 1;
+  max-height: 420px;
+}
+.bingo-cell {
+  background: var(--bg-card) !important;
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 1px var(--ring-warm);
+  transition: background 0.25s, box-shadow 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bingo-cell.filled { background: var(--accent) !important; box-shadow: 0px 0px 0px 1px var(--accent) !important; }
+.bingo-cell.filled .cell-zh { color: #fff !important; }
+
+/* ── 7. 比較頁 slide 17 深色處理 ─────────────────────── */
+/* 用 CSS :nth-child 無法精確定位 data-idx，改用全部 compare 預設淺色，
+   深色 compare 在 content.json 要加 "dark": true，JS 會加 class        */

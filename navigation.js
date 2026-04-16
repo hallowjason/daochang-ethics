@@ -11,6 +11,12 @@ document.addEventListener('slides-ready', initPresentation);
 
 function initPresentation() {
 
+// ── 套用 zoom（從 content.json meta 讀取）────────────────
+const zoom = window.PRESENTATION_META?.zoom;
+if (zoom && zoom !== 1) {
+  document.documentElement.style.zoom = String(zoom);
+}
+
 const slides      = Array.from(document.querySelectorAll('.slide'));
 const total       = slides.length;
 let current       = 0;
