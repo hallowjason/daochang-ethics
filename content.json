@@ -1,0 +1,637 @@
+{
+  "meta": {
+    "title": "道場倫理與行政倫理",
+    "subtitle": "修道傳統化，辦道社會化，道場管理化",
+    "zoom": 1.3,
+    "theme": "daochang",
+    "totalSlides": 38,
+    "firebase": {
+      "wordcloudPath": "/daochang-ethics/wordcloud",
+      "letterPath": "/daochang-ethics/letters"
+    }
+  },
+  "slides": [
+    {
+      "id": 1,
+      "type": "cover",
+      "fields": {
+        "title_zh": "道場倫理與行政倫理",
+        "title_en": "Daochang Ethics and Administrative Ethics",
+        "subtitle_zh": "修道傳統化，辦道社會化，道場管理化",
+        "subtitle_en": "Rooting Practice in Tradition, Integrating Spreading of Tao into Society, and Modernizing Temple Administration",
+        "chapter": ""
+      }
+    },
+    {
+      "id": 2,
+      "type": "toc",
+      "fields": {
+        "title_zh": "目錄",
+        "title_en": "Contents",
+        "chapters": [
+          {
+            "num": "01",
+            "zh": "道場與企業的人才有何不同？",
+            "en": "What Distinguishes Talent in a Temple vs. a Corporation?"
+          },
+          {
+            "num": "02",
+            "zh": "道要拓展出去的基本單位是什麼？",
+            "en": "What is the Fundamental Unit for Spreading the Tao?"
+          },
+          {
+            "num": "03",
+            "zh": "只要能低心下氣，那這個道場就能「和」",
+            "en": "Harmony Flourishes Through Humility"
+          },
+          {
+            "num": "04",
+            "zh": "你的上方是誰？",
+            "en": "Understanding Your Hierarchy"
+          },
+          {
+            "num": "05",
+            "zh": "一個健康、雙向的交流環境",
+            "en": "A Healthy, Two-Way Environment for Communication"
+          },
+          {
+            "num": "06",
+            "zh": "什麼樣的道場，由我們來決定",
+            "en": "Defining the Future of Our Daochang Together"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "chapter",
+      "fields": {
+        "chapter_num": "第一章",
+        "chapter_num_en": "Chapter 1",
+        "title_zh": "道場與企業的人才有何不同？",
+        "title_en": "Temple vs. Corporate Talent",
+        "intro_zh": "最大的不同在於擁有：道的共識",
+        "intro_en": "The core difference lies in sharing the consensus of the Tao."
+      }
+    },
+    {
+      "id": 4,
+      "type": "compare",
+      "fields": {
+        "title_zh": "初念 vs. 轉念",
+        "title_en": "Initial Thought vs. Transformed Perspective",
+        "left": {
+          "label_zh": "初念",
+          "label_en": "Initial Thought",
+          "body_zh": "被上方幹部慈悲糾正時，一開始難免有情緒，會想：「我都這麼努力了，為什麼還不行？」",
+          "body_en": "When corrected by seniors, emotions often arise: 'I've worked so hard, why is it still not enough?'"
+        },
+        "right": {
+          "label_zh": "轉念",
+          "label_en": "Transformed Perspective",
+          "body_zh": "念頭一轉：「或許不是努力的問題，每個人本來就不同，我並沒有被否定，而是大家想把事做好。」",
+          "body_en": "A shift in mindset: 'It’s not a rejection of my effort. We are all different, and the goal is simply to make things better together.'"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "content",
+      "fields": {
+        "title_zh": "企業人才的對照",
+        "title_en": "A Contrast with Corporate Talent",
+        "body_zh": "一般企業人才，被責備後可能動了離職念頭，覺得下一份工作會更好。但修道這條路，不需要有人付薪水，我們是為了道、為了眾生，也為了自己不帶遺憾回天。",
+        "body_en": "In the corporate world, criticism often leads to thoughts of resignation. In the Tao, however, we are not driven by a salary, but by a mission for the Tao, for all beings, and to return to heaven without regret."
+      }
+    },
+    {
+      "id": 6,
+      "type": "quote",
+      "fields": {
+        "quote_zh": "以終極目標來看，修道這條路，不需要有人付我們薪水，我們是為了道、為了眾生，也為了自己不帶著遺憾回天而做。",
+        "quote_en": "Looking at our ultimate goal, the path of the Tao requires no salary. We serve for the sake of the Tao, for all sentient beings, and to ensure our return to heaven is free of regrets.",
+        "source": ""
+      }
+    },
+    {
+      "id": 7,
+      "type": "interactive",
+      "fields": {
+        "title_zh": "互動練習：初念 vs 轉念",
+        "title_en": "Interactive Practice: Shifting Perspectives",
+        "scenario_zh": "情境：你精心製作的海報被上方要求全部重做……",
+        "scenario_en": "Scenario: A poster you spent days designing is requested to be completely redone by your seniors...",
+        "left_task_zh": "寫下你的初念（情緒感受）",
+        "left_task_en": "Write down your initial thought (emotional response)",
+        "right_task_zh": "練習寫下轉念（正面解讀）",
+        "right_task_en": "Practice writing a transformed perspective (positive interpretation)"
+      }
+    },
+    {
+      "id": 8,
+      "type": "chapter",
+      "fields": {
+        "chapter_num": "第二章",
+        "chapter_num_en": "Chapter 2",
+        "title_zh": "道要拓展出去的基本單位是什麼？",
+        "title_en": "The Fundamental Unit for Expanding the Tao",
+        "intro_zh": "這跟「人才」有十分緊密的關係",
+        "intro_en": "It is inextricably linked to the cultivation of talent."
+      }
+    },
+    {
+      "id": 9,
+      "type": "cards",
+      "fields": {
+        "title_zh": "人才三大特質",
+        "title_en": "Three Core Qualities of Tao Talent",
+        "items": [
+          {
+            "label_zh": "禮儀風範",
+            "label_en": "Etiquette & Grace",
+            "desc_zh": "外在表現，以身作則，展現修道人的氣質。",
+            "desc_en": "External conduct and leading by example, reflecting the refined aura of a practitioner."
+          },
+          {
+            "label_zh": "幫辦能力",
+            "label_en": "Administrative Capability",
+            "desc_zh": "履行壇辦職責，具備承上啟下的執行力。",
+            "desc_en": "Fulfilling duties with the ability to bridge seniors and juniors effectively."
+          },
+          {
+            "label_zh": "自覺認知",
+            "label_en": "Self-Awareness",
+            "desc_zh": "內在覺察，能自我修正，明白修辦的意義。",
+            "desc_en": "Internal reflection and the capacity for self-correction and understanding our purpose."
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "scripture",
+      "fields": {
+        "source_zh": "師尊慈訓",
+        "source_en": "Teachings of the Grand Master",
+        "text_zh": "壇辦職責實非輕，帶動一方化眾人；佛規禮節詳細研，承上啟下導後行。招待道親好誠心，渡人登岸莫言貧；不可日久而生厭，徘徊觀望不前行。遇考存誠魔自化，任勞任怨無退悔，含和忍辱理為尊。",
+        "text_en": "The duties of a temple assistant are profound, guiding a region and transforming souls. Study the rituals deeply, bridging those above and below. Welcome fellow practitioners with sincerity, and guide others to the Tao without discrimination. Let not time breed weariness or hesitation. Face trials with sincerity to dissolve obstacles; serve with patience, without regret, holding truth and harmony as supreme."
+      }
+    },
+    {
+      "id": 11,
+      "type": "quote",
+      "fields": {
+        "quote_zh": "道不是行與能，而在低心下氣。",
+        "quote_en": "The Tao is not found in mere capability or performance, but in the depth of one's humility.",
+        "source": "老祖師慈諭 — Words of the Founding Patriarch"
+      }
+    },
+    {
+      "id": 12,
+      "type": "interactive",
+      "fields": {
+        "interactive_type": "wordcloud",
+        "title_zh": "互動：文字雲共創",
+        "title_en": "Interactive: Collaborative Word Cloud",
+        "question_zh": "你認為道要拓展出去，最需要的三個條件是什麼？",
+        "question_en": "In your opinion, what are the three most essential conditions for expanding the Tao?",
+        "qr_label_zh": "掃描上方 QR Code 加入討論",
+        "qr_label_en": "Scan the QR code to join the discussion",
+        "firebase_path": "/daochang-ethics/wordcloud"
+      }
+    },
+    {
+      "id": 13,
+      "type": "chapter",
+      "fields": {
+        "chapter_num": "第三章",
+        "chapter_num_en": "Chapter 3",
+        "title_zh": "只要能低心下氣，那這個道場就能「和」",
+        "title_en": "Harmony Through Humility",
+        "intro_zh": "我們常把「前賢」掛在嘴邊，前賢只是一個尊稱嗎？",
+        "intro_en": "We often speak of 'predecessors.' Is it merely a title of respect?"
+      }
+    },
+    {
+      "id": 14,
+      "type": "stack",
+      "fields": {
+        "title_zh": "誰是前賢？",
+        "title_en": "Who Are Our Predecessors?",
+        "items": [
+          {
+            "zh": "早咱一個時辰求道即是前賢",
+            "en": "Anyone who received the Tao even an hour before us"
+          },
+          {
+            "zh": "早咱一天開始修道即是前賢",
+            "en": "Anyone who started their practice a day earlier"
+          },
+          {
+            "zh": "比咱早清口即是前賢",
+            "en": "Those who took vegetarian vows before us"
+          },
+          {
+            "zh": "比咱早安堂即是前賢",
+            "en": "Those who established an altar earlier"
+          },
+          {
+            "zh": "比咱行功大，了愿大即是前賢",
+            "en": "Those who have made greater contributions and fulfilled more vows"
+          },
+          {
+            "zh": "比咱能力強，為道場做事即是前賢",
+            "en": "Those with greater capabilities serving the temple"
+          },
+          {
+            "zh": "犧牲付出比咱多即是前賢",
+            "en": "Those who have sacrificed more for the mission"
+          },
+          {
+            "zh": "對道學研究比咱深即是前賢",
+            "en": "Those with a deeper understanding of Tao studies"
+          },
+          {
+            "zh": "對道場的工作比咱了解即是前賢",
+            "en": "Those more knowledgeable about temple operations"
+          },
+          {
+            "zh": "修養比咱好也是前賢",
+            "en": "Those with superior character and self-cultivation"
+          },
+          {
+            "zh": "道念、中心思想比咱堅定也是前賢",
+            "en": "Those with firmer conviction and core beliefs"
+          },
+          {
+            "zh": "曾成全過咱，講道理給咱聽也是前賢",
+            "en": "Anyone who has ever guided us or shared the truth with us"
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "content",
+      "fields": {
+        "title_zh": "前賢的意義",
+        "title_en": "The True Meaning of Predecessors",
+        "body_zh": "需要尊敬的人是很多的，這表示尊敬他人並不會讓我們變小。重點在於懂得「尊前提後」，在尊敬前人的同時，也要有責任感引導後進。",
+        "body_en": "There are many to respect, and honoring others does not diminish ourselves. The essence lies in 'honoring predecessors and guiding juniors'—maintaining reverence for those before us while embracing the responsibility to lead those who follow."
+      }
+    },
+    {
+      "id": 16,
+      "type": "compare",
+      "fields": {
+        "title_zh": "尊前有道，提後有德",
+        "title_en": "Tao in Honoring, Virtue in Guiding",
+        "left": {
+          "label_zh": "尊前有道",
+          "label_en": "Honoring Predecessors",
+          "body_zh": "從老師與前賢那裡承接了道，自然應該尊敬前人，這代表我們飲水思源，明白道的源頭。",
+          "body_en": "Having received the Tao from our teachers and predecessors, it is only natural to honor them. This reflects our gratitude and recognition of the Tao's source."
+        },
+        "right": {
+          "label_zh": "提後有德",
+          "label_en": "Guiding Juniors",
+          "body_zh": "有道的修行人必有慈悲心，會耐心渡化眾生。引導人不可急躁，更不可因他人暫時不聽就心生氣憤。",
+          "body_en": "A true practitioner possesses compassion and patience in guiding others. We must never lose heart or temper just because someone is not yet ready to listen."
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": "compare",
+      "fields": {
+        "title_zh": "有德無道 / 有道無德",
+        "title_en": "Virtue without Tao / Tao without Virtue",
+        "left": {
+          "label_zh": "有德無道",
+          "label_en": "Virtue without Tao",
+          "body_zh": "只知愛護後學，卻不知尊師重道，沒有前輩指引，回天之路難免迷失。",
+          "body_en": "If one only cares for juniors but fails to honor seniors, they lose their guidance, making the journey back to heaven easily lost."
+        },
+        "right": {
+          "label_zh": "有道無德",
+          "label_en": "Tao without Virtue",
+          "body_zh": "很會尊敬前輩，卻不願用心辦道、不愛護後學。缺乏犧牲奉獻，道脈便無法延續。",
+          "body_en": "Respecting seniors without actively spreading the Tao or caring for juniors leads to a dead end. Without sacrifice, the legacy cannot continue."
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": "compare",
+      "fields": {
+        "title_zh": "有前無後 / 有後無前",
+        "title_en": "Seniors without Juniors / Juniors without Seniors",
+        "left": {
+          "label_zh": "有前無後",
+          "label_en": "Seniors without Juniors",
+          "body_zh": "孤軍奮鬥，缺乏後輩跟隨，想振興道務卻感到心有餘而力不足。",
+          "body_en": "Working in isolation without followers leads to a lack of momentum. One may wish to revitalize the mission but find themselves without strength."
+        },
+        "right": {
+          "label_zh": "有後無前",
+          "label_en": "Juniors without Seniors",
+          "body_zh": "後學眾多卻目無尊長，自作主張。一旦斷了金線連結，便如源竭根枯，無所遵循。",
+          "body_en": "Having many followers but disregarding one's own seniors leads to arrogance. Severing the spiritual connection is like a tree with withered roots."
+        }
+      }
+    },
+    {
+      "id": 19,
+      "type": "table",
+      "fields": {
+        "title_zh": "尊前提後觀念總結",
+        "title_en": "Summary: Honoring and Guiding",
+        "rows": [
+          {
+            "situation_zh": "他人比咱前",
+            "situation_en": "Ahead of us",
+            "action_zh": "咱尊他",
+            "action_en": "We honor them"
+          },
+          {
+            "situation_zh": "他人比咱後",
+            "situation_en": "Behind us",
+            "action_zh": "咱提他",
+            "action_en": "We guide them"
+          },
+          {
+            "situation_zh": "他人比咱強",
+            "situation_en": "Stronger than us",
+            "action_zh": "咱敬他",
+            "action_en": "We respect them"
+          },
+          {
+            "situation_zh": "他人比咱弱",
+            "situation_en": "Weaker than us",
+            "action_zh": "咱愛他",
+            "action_en": "We love them"
+          },
+          {
+            "situation_zh": "他人比咱賢",
+            "situation_en": "Wiser than us",
+            "action_zh": "咱效他",
+            "action_en": "We follow them"
+          },
+          {
+            "situation_zh": "他人比咱愚",
+            "situation_en": "Less realized",
+            "action_zh": "咱容他",
+            "action_en": "We tolerate them"
+          }
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": "content",
+      "fields": {
+        "title_zh": "禮拜的意義",
+        "title_en": "The Significance of Worship",
+        "body_zh": "參辭駕與燒香不是負擔，而是與仙佛心靈交流的時刻。佛都不敬了，何談敬人？叩頭雖非功德，但能消業並提昇心靈境界。尊前提後，更要敬愛同修。",
+        "body_en": "Rituals and incense are not burdens, but moments of spiritual communion. If we cannot respect the Buddhas, how can we respect people? Bowing may not be 'merit' in itself, but it dissolves karma and elevates our state of mind."
+      }
+    },
+    {
+      "id": 21,
+      "type": "quote",
+      "fields": {
+        "quote_zh": "不論進入道場的先後順序，後學（我的謙稱）就是一種心態。",
+        "quote_en": "Regardless of when one entered the temple, being a 'junior practitioner' is, above all, a state of mind.",
+        "source": ""
+      }
+    },
+    {
+      "id": 22,
+      "type": "interactive",
+      "fields": {
+        "interactive_type": "bingo",
+        "title_zh": "互動：尋找前賢賓果",
+        "title_en": "Interactive: Finding Predecessors Bingo",
+        "instruction_zh": "在你的周圍，尋找符合下列特質的前賢並記下他們的名字。",
+        "instruction_en": "Look around you, find predecessors who fit these descriptions, and note their names.",
+        "cells": [
+          "曾經成全過我的人",
+          "修養比我好的人",
+          "辦道能力比我強的人",
+          "對道學研究比我深的人",
+          "比我早清口的人",
+          "犧牲付出比我多的人",
+          "比我早安堂的人",
+          "道念比我堅定的人",
+          "比我早求道的人"
+        ],
+        "cells_en": [
+          "Guided me before",
+          "Has better character",
+          "Stronger capabilities",
+          "Deeper Tao studies",
+          "Earlier vegetarian vow",
+          "More sacrifices made",
+          "Earlier altar setup",
+          "Firmer conviction",
+          "Received Tao earlier"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": "chapter",
+      "fields": {
+        "chapter_num": "第四章",
+        "chapter_num_en": "Chapter 4",
+        "title_zh": "你的上方是誰？",
+        "title_en": "Who Is Above You?",
+        "intro_zh": "倫理上下、平行關係，是道場和諧的基礎。",
+        "intro_en": "The hierarchy and parallel relationships are the bedrock of temple harmony."
+      }
+    },
+    {
+      "id": 24,
+      "type": "content",
+      "fields": {
+        "title_zh": "情境一：在自己的區域",
+        "title_en": "Scenario 1: Within Your Own Area",
+        "body_zh": "首要先看是什麼情況。若在平日所屬的區域中，你的直接上方老師就是你行事的最高指導原則。",
+        "body_en": "Consider the context first. When operating within your regular area, your direct senior teacher serves as your primary guiding principle."
+      }
+    },
+    {
+      "id": 25,
+      "type": "content",
+      "fields": {
+        "title_zh": "情境二：短期開荒",
+        "title_en": "Scenario 2: Short-term Missions",
+        "body_zh": "若參與其他團隊開荒，即便原本的老師在台灣，你的決定仍需請示開荒當地的負責老師。客隨主便，尊重當地的領導結構。",
+        "body_en": "When joining another team for missions, decisions must be consulted with the local lead teacher. Respect the local leadership structure of the mission site."
+      }
+    },
+    {
+      "id": 26,
+      "type": "content",
+      "fields": {
+        "title_zh": "前提：報備制度",
+        "title_en": "Prerequisite: The Reporting System",
+        "body_zh": "出發前應先向原區域老師報備：行程、地點、目的與回程時間。如有渡眾成果，也應及時回報，確保倫理不斷線。",
+        "body_en": "Always report to your original teacher before departing: the itinerary, location, purpose, and return time. Ensure all progress in spreading the Tao is reported back to maintain the lineage connection."
+      }
+    },
+    {
+      "id": 27,
+      "type": "quote",
+      "fields": {
+        "quote_zh": "唯有從你自己開始重視道場的倫理上下、平行關係，你才會開始被重視，也才能最大化地減少不必要的人事紛爭。",
+        "quote_en": "Only when you begin to value the hierarchy and relationships within the temple will you be truly valued. This is the surest way to minimize unnecessary interpersonal conflicts.",
+        "source": ""
+      }
+    },
+    {
+      "id": 28,
+      "type": "chapter",
+      "fields": {
+        "chapter_num": "第五章",
+        "chapter_num_en": "Chapter 5",
+        "title_zh": "一個健康、雙向的交流環境",
+        "title_en": "A Healthy, Two-Way Exchange",
+        "intro_zh": "聽話 ≠ 一言堂",
+        "intro_en": "Following guidance does not mean silencing different voices."
+      }
+    },
+    {
+      "id": 29,
+      "type": "content",
+      "fields": {
+        "title_zh": "不是一言堂",
+        "title_en": "Not a One-Way Street",
+        "body_zh": "「服從」不代表底下的人不能有聲音。健康的道場應保有向上溝通（諫言）的空間，而非僵化的一言堂。",
+        "body_en": "Obedience does not mean juniors must be silent. A healthy temple environment provides space for upward communication and constructive suggestions."
+      }
+    },
+    {
+      "id": 30,
+      "type": "quote",
+      "fields": {
+        "quote_zh": "我們要有一個很底層的心態：為了道好，不圓滿的地方可以選擇動手作，或跟相關的人說。",
+        "quote_en": "We must maintain a fundamental mindset: for the good of the Tao, we choose to either personally improve what is lacking or communicate it with those involved.",
+        "source": ""
+      }
+    },
+    {
+      "id": 31,
+      "type": "flow",
+      "fields": {
+        "title_zh": "權責判斷與溝通方式",
+        "title_en": "Judgment and Communication",
+        "premise_zh": "底層心態是「為了道好」",
+        "premise_en": "Fundamental Mindset: 'For the Sake of the Tao'",
+        "branches": [
+          {
+            "condition_zh": "在你的權責範圍內",
+            "condition_en": "Within your scope of duty",
+            "action_zh": "直接動手改善，讓事情更圓滿",
+            "action_en": "Directly take action to improve and perfect it"
+          },
+          {
+            "condition_zh": "不在你可以改變的範圍",
+            "condition_en": "Beyond your scope of change",
+            "action_zh": "直接、委婉地找相關負責人溝通",
+            "action_en": "Communicate directly and tactfully with those in charge"
+          }
+        ],
+        "note_zh": "溝通方式多種多樣，誠懇與橫衝直撞，結果大不相同。",
+        "note_en": "Method matters: Sincerity and bluntness lead to very different outcomes."
+      }
+    },
+    {
+      "id": 32,
+      "type": "chapter",
+      "fields": {
+        "chapter_num": "第六章",
+        "chapter_num_en": "Chapter 6",
+        "title_zh": "什麼樣的道場，由我們來決定",
+        "title_en": "Our Choices Define Our Daochang",
+        "intro_zh": "每一個人的選擇，都在塑造這個道場的樣子。",
+        "intro_en": "Every choice we make shapes the collective identity of our temple."
+      }
+    },
+    {
+      "id": 33,
+      "type": "content",
+      "fields": {
+        "title_zh": "有廟就有和尚",
+        "title_en": "The Temple and Its Keepers",
+        "body_zh": "「有廟就有和尚」，有道場自然有人才。但我們該深思：這是一個正氣凜然的殿堂，還是一個充斥紛擾的地方？這取決於我們的修為。",
+        "body_en": "Where there is a temple, there are monks; where there is a mission, there is talent. We must reflect: Is our temple a sanctuary of righteousness or a place of discord? This depends on our own cultivation."
+      }
+    },
+    {
+      "id": 34,
+      "type": "content",
+      "fields": {
+        "title_zh": "幹部的力量",
+        "title_en": "The Power of Cadres",
+        "body_zh": "當幹部理念清楚，風範、能力與認知自然會成長。以身示道是最好的榜樣，後學看到幹部的犧牲奉獻，修辦精神自然能展現。",
+        "body_en": "Clear vision in leaders naturally fosters better grace, capability, and awareness. Leading by example is the most powerful teaching; when juniors witness the dedication of seniors, the spirit of service flourishes."
+      }
+    },
+    {
+      "id": 35,
+      "type": "quote",
+      "fields": {
+        "quote_zh": "修道傳統化，辦道社會化，道場管理化",
+        "quote_en": "Rooting Practice in Tradition, Integrating the Spreading of Tao into Society, and Modernizing Temple Administration.",
+        "source": "活佛師尊慈諭 — Teachings of the Living Buddha Grand Master"
+      }
+    },
+    {
+      "id": 36,
+      "type": "diagram",
+      "fields": {
+        "title_zh": "道場管理的兩大工程",
+        "title_en": "The Two Pillars of Temple Management",
+        "circles": [
+          {
+            "label_zh": "道場倫理",
+            "label_en": "Temple Ethics",
+            "desc_zh": "前後倫序、尊前提後"
+          },
+          {
+            "label_zh": "行政倫理",
+            "label_en": "Administrative Ethics",
+            "desc_zh": "上下溝通、雙向交流"
+          }
+        ],
+        "body_zh": "這兩大工程相輔相成，關係著大道的開闡與蒼生的慧命。",
+        "body_en": "These pillars complement each other, directly impacting the expansion of the Tao and the spiritual destiny of all beings."
+      }
+    },
+    {
+      "id": 37,
+      "type": "interactive",
+      "fields": {
+        "interactive_type": "letter",
+        "title_zh": "互動：給道場的一封信",
+        "title_en": "Interactive: A Letter to the Daochang",
+        "prompt_zh": "分享一個你覺得道場可以更好，且你願意一起努力改變的地方。",
+        "prompt_en": "Share one aspect where you feel our temple can improve, and where you are willing to contribute to that change.",
+        "qr_label_zh": "寫下你的心聲與承諾",
+        "qr_label_en": "Write down your thoughts and commitment",
+        "firebase_path": "/daochang-ethics/letters"
+      }
+    },
+    {
+      "id": 38,
+      "type": "closing",
+      "fields": {
+        "title_zh": "什麼樣的道場，由我們來決定",
+        "title_en": "We Define the Future of Our Daochang",
+        "tagline_zh": "修道傳統化，辦道社會化，道場管理化",
+        "tagline_en": "Traditional Practice, Social Integration, and Modern Administration"
+      }
+    }
+  ]
+}

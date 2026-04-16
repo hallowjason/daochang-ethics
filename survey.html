@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互動問卷 - 道場倫理</title>
+  <!-- Noto Serif TC for mobile compatibility -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <style>
+    :root {
+      --bg-color: #f4eee1; /* Parchment */
+      --primary: #8b4513; /* SaddleBrown */
+      --accent: #c04000; /* Terracotta */
+      --text: #2c2c2c;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      font-family: 'Noto Serif TC', serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 90%;
+      max-width: 500px;
+      padding: 2rem;
+      background: rgba(255,255,255,0.4);
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid rgba(139, 69, 19, 0.1);
+      box-sizing: border-box;
+    }
+    h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    .question {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.8);
+    }
+    textarea {
+      height: 180px;
+      resize: vertical;
+      background: #fdfaf2; 
+      border: 1px dashed #8b4513;
+      line-height: 1.8;
+    }
+    button {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.1s;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    button:active {
+      transform: scale(0.98);
+      background-color: #a03600;
+    }
+    #message {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+    .hidden { display: none !important; }
+    
+    /* Letter specific style */
+    .letter-mode textarea {
+      background-image: linear-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px);
+      background-size: 100% 1.8rem;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      color: #2e7d32;
+      margin-bottom: 1rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 文字雲模式 -->
+    <div id="wordcloud-form" class="hidden">
+      <h2>文字雲互動</h2>
+      <div class="question">您認為道要拓展出去，<br>最需要的三個條件？</div>
+      <div class="form-group"><input type="text" id="wc1" placeholder="核心條件一" maxlength="10"></div>
+      <div class="form-group"><input type="text" id="wc2" placeholder="核心條件二" maxlength="10"></div>
+      <div class="form-group"><input type="text" id="wc3" placeholder="核心條件三" maxlength="10"></div>
+      <button onclick="submitWordCloud()">送出關鍵字</button>
+    </div>
+
+    <!-- 給道場的信模式 -->
+    <div id="letter-form" class="hidden">
+      <h2>給道場的一封信</h2>
+      <div class="question">請寫下您對道場未來的<br>期許、願景或建議：</div>
+      <div class="form-group">
+        <textarea id="letter-content" placeholder="親愛的前賢們..."></textarea>
+      </div>
+      <button onclick="submitLetter()">送出心聲</button>
+    </div>
+
+    <div id="message"></div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+
+    // 初始化介面
+    if (mode === 'wordcloud') {
+      document.getElementById('wordcloud-form').classList.remove('hidden');
+    } else if (mode === 'letter') {
+      const lf = document.getElementById('letter-form');
+      lf.classList.remove('hidden');
+      lf.classList.add('letter-mode');
+    } else {
+      document.getElementById('message').innerText = '無效的連結。請掃描投影片上的 QR Code。';
+    }
+
+    // 提交文字雲
+    function submitWordCloud() {
+      const inputs = [
+        document.getElementById('wc1').value.trim(),
+        document.getElementById('wc2').value.trim(),
+        document.getElementById('wc3').value.trim()
+      ].filter(v => v !== '');
+
+      if (inputs.length === 0) {
+        alert('請至少填寫一個條件。');
+        return;
+      }
+
+      const db = firebase.database();
+      const promises = inputs.map(text => {
+        return db.ref('wordcloud_entries').push({
+          text: text,
+          timestamp: Date.now()
+        });
+      });
+
+      Promise.all(promises)
+        .then(() => showSuccess())
+        .catch(err => alert('提交失敗：' + err.message));
+    }
+
+    // 提交信件
+    function submitLetter() {
+      const content = document.getElementById('letter-content').value.trim();
+      if (!content) {
+        alert('請填寫信件內容。');
+        return;
+      }
+
+      const db = firebase.database();
+      db.ref('letter_entries').push({
+        content: content,
+        timestamp: Date.now()
+      })
+      .then(() => showSuccess())
+      .catch(err => alert('提交失敗：' + err.message));
+    }
+
+    function showSuccess() {
+      document.getElementById('wordcloud-form').classList.add('hidden');
+      document.getElementById('letter-form').classList.add('hidden');
+      document.getElementById('message').innerHTML = `
+        <span class="success-icon">✓</span>
+        <div style="color:#2e7d32; font-size:1.3rem">提交成功！</div>
+        <p>感謝您的參與，請抬頭看大螢幕。</p>
+      `;
+    }
+  </script>
+</body>
+</html>

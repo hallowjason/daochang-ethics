@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>道場倫理與行政倫理</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <!-- QR Code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Style -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 進度條 -->
+  <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+  <!-- 主容器：38 個 slide 由 JS renderSlides() 動態注入此處 -->
+  <div class="presentation" id="presentation"></div>
+
+  <!-- 導覽控制列 -->
+  <div id="nav-controls">
+    <button class="nav-btn" id="btn-prev">&#8592;</button>
+    <span id="slide-counter">01 / 38</span>
+    <button class="nav-btn" id="btn-next">&#8594;</button>
+  </div>
+
+  <!-- Slide 底部導覽觸發區 -->
+  <div id="slide-nav-trigger"></div>
+  <div id="slide-nav-panel"></div>
+
+  <script>
+    // ── Slide Type 渲染模板 ──
+
+    function renderCover(f) {
+      return `
+        <div class="cover-inner">
+          <div class="cover-eyebrow anim-item">道場倫理與行政倫理</div>
+          <div class="bilingual-title">
+            <div class="title-zh anim-item" data-editable data-field="title_zh">${f.title_zh}</div>
+            <div class="title-en anim-item" data-editable data-field="title_en">${f.title_en}</div>
+          </div>
+          <div class="cover-divider anim-item"></div>
+          <div class="cover-subtitle">
+            <div class="subtitle-zh anim-item" data-editable data-field="subtitle_zh">${f.subtitle_zh}</div>
+            <div class="subtitle-en anim-item" data-editable data-field="subtitle_en">${f.subtitle_en}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderToc(f) {
+      return `
+        <div class="toc-inner">
+          <div class="bilingual-title">
+            <div class="title-zh anim-item">${f.title_zh}</div>
+            <div class="title-en anim-item">${f.title_en}</div>
+          </div>
+          <div class="toc-list anim-item">
+            ${f.chapters.map(ch => `
+              <div class="toc-item">
+                <span class="toc-num">${ch.num}</span>
+                <div class="toc-text">
+                  <div class="toc-zh">${ch.zh}</div>
+                  <div class="toc-en">${ch.en}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderChapter(f) {
+      return `
+        <div class="chapter-inner">
+          <div class="chapter-num-wrap anim-item">
+            <span class="chapter-num-zh">${f.chapter_num}</span>
+            <span class="chapter-num-en">${f.chapter_num_en}</span>
+          </div>
+          <div class="chapter-divider anim-item"></div>
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          ${f.intro_zh ? `
+          <div class="chapter-intro anim-item">
+            <div class="intro-zh">${f.intro_zh}</div>
+            <div class="intro-en">${f.intro_en || ''}</div>
+          </div>` : ''}
+        </div>
+      `;
+    }
+
+    function renderQuote(f) {
+      return `
+        <div class="quote-inner">
+          <div class="quote-mark anim-item">"</div>
+          <div class="quote-zh anim-item" data-editable data-field="quote_zh">${f.quote_zh}</div>
+          <div class="quote-en anim-item" data-editable data-field="quote_en">${f.quote_en}</div>
+          ${f.source ? `<div class="quote-source anim-item">— ${f.source}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function renderContent(f) {
+      return `
+        <div class="content-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh" data-editable data-field="title_zh">${f.title_zh}</div>
+            <div class="title-en" data-editable data-field="title_en">${f.title_en}</div>
+          </div>
+          <div class="content-body anim-item">
+            <div class="body-zh" data-editable data-field="body_zh">${f.body_zh}</div>
+            <div class="body-en" data-editable data-field="body_en">${f.body_en || ''}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCompare(f) {
+      return `
+        <div class="compare-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          <div class="compare-grid anim-item">
+            <div class="compare-card compare-left">
+              <div class="compare-label">
+                <div class="label-zh">${f.left.label_zh}</div>
+                <div class="label-en">${f.left.label_en}</div>
+              </div>
+              <div class="compare-body">
+                <div class="body-zh">${f.left.body_zh}</div>
+                <div class="body-en">${f.left.body_en || ''}</div>
+              </div>
+            </div>
+            <div class="compare-card compare-right">
+              <div class="compare-label">
+                <div class="label-zh">${f.right.label_zh}</div>
+                <div class="label-en">${f.right.label_en}</div>
+              </div>
+              <div class="compare-body">
+                <div class="body-zh">${f.right.body_zh}</div>
+                <div class="body-en">${f.right.body_en || ''}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCards(f) {
+      return `
+        <div class="cards-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          <div class="cards-grid anim-item">
+            ${f.items.map(item => `
+              <div class="card-item">
+                <div class="card-label">
+                  <div class="label-zh">${item.label_zh}</div>
+                  <div class="label-en">${item.label_en}</div>
+                </div>
+                <div class="card-desc">
+                  <div class="desc-zh">${item.desc_zh}</div>
+                  <div class="desc-en">${item.desc_en}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderScripture(f) {
+      return `
+        <div class="scripture-inner">
+          <div class="scripture-source anim-item">
+            <span class="source-zh">${f.source_zh}</span>
+            <span class="source-en">${f.source_en}</span>
+          </div>
+          <div class="scripture-block anim-item">
+            <div class="scripture-text-zh" data-editable data-field="text_zh">${f.text_zh}</div>
+            <div class="scripture-text-en" data-editable data-field="text_en">${f.text_en || ''}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStack(f) {
+      return `
+        <div class="stack-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          <div class="stack-area" id="stack-cards">
+            ${f.items.map((item, i) => `
+              <div class="stack-card" data-card-idx="${i}">
+                <div class="stack-text-zh">${item.zh}</div>
+                <div class="stack-text-en">${item.en}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="stack-hint anim-item">點擊繼續 · Click to reveal</div>
+        </div>
+      `;
+    }
+
+    function renderTable(f) {
+      return `
+        <div class="table-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          <div class="table-wrap anim-item">
+            <table class="ethics-table">
+              <thead>
+                <tr>
+                  <th class="th-zh">情境</th><th class="th-en">Situation</th>
+                  <th class="th-zh">態度</th><th class="th-en">Attitude</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${f.rows.map(row => `
+                  <tr>
+                    <td class="td-zh">${row.situation_zh}</td>
+                    <td class="td-en">${row.situation_en}</td>
+                    <td class="td-zh accent">${row.action_zh}</td>
+                    <td class="td-en accent">${row.action_en}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFlow(f) {
+      return `
+        <div class="flow-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          <div class="flow-diagram anim-item">
+            <div class="flow-premise">
+              <div class="premise-zh">${f.premise_zh}</div>
+              <div class="premise-en">${f.premise_en}</div>
+            </div>
+            <div class="flow-arrow-down">↓</div>
+            <div class="flow-branches">
+              ${f.branches.map(b => `
+                <div class="flow-branch">
+                  <div class="branch-condition">
+                    <div class="cond-zh">${b.condition_zh}</div>
+                    <div class="cond-en">${b.condition_en}</div>
+                  </div>
+                  <div class="branch-arrow">→</div>
+                  <div class="branch-action">
+                    <div class="act-zh">${b.action_zh}</div>
+                    <div class="act-en">${b.action_en}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="flow-note">
+              <div class="note-zh">${f.note_zh}</div>
+              <div class="note-en">${f.note_en}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDiagram(f) {
+      return `
+        <div class="diagram-inner">
+          <div class="bilingual-title anim-item">
+            <div class="title-zh">${f.title_zh}</div>
+            <div class="title-en">${f.title_en}</div>
+          </div>
+          <div class="diagram-circles anim-item">
+            ${f.circles.map((c, i) => `
+              <div class="diagram-circle circle-${i === 0 ? 'left' : 'right'}">
+                <div class="circle-label-zh">${c.label_zh}</div>
+                <div class="circle-label-en">${c.label_en}</div>
+                <div class="circle-desc">${c.desc_zh || ''}</div>
+              </div>
+            `).join('')}
+            <div class="diagram-overlap">
+              <div class="overlap-icon">⊕</div>
+            </div>
+          </div>
+          <div class="diagram-body anim-item">
+            <div class="body-zh">${f.body_zh}</div>
+            <div class="body-en">${f.body_en}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderInteractive(slide) {
+      const f = slide.fields;
+      const type = slide.interactive_type || f.interactive_type;
+
+      if (type === 'wordcloud') {
+        return `
+          <div class="interactive-inner interactive-firebase">
+            <div class="bilingual-title anim-item">
+              <div class="title-zh">${f.title_zh}</div>
+              <div class="title-en">${f.title_en}</div>
+            </div>
+            <div class="firebase-question anim-item">
+              <div class="q-zh">${f.question_zh}</div>
+              <div class="q-en">${f.question_en}</div>
+            </div>
+            <div class="firebase-layout anim-item">
+              <div class="qr-block">
+                <div id="qr-wordcloud"></div>
+                <div class="qr-label-zh">${f.qr_label_zh}</div>
+                <div class="qr-label-en">${f.qr_label_en}</div>
+              </div>
+              <div class="wordcloud-display" id="wordcloud-display"></div>
+            </div>
+          </div>
+        `;
+      } else if (type === 'bingo') {
+        return `
+          <div class="interactive-inner interactive-bingo">
+            <div class="bilingual-title anim-item">
+              <div class="title-zh">${f.title_zh}</div>
+              <div class="title-en">${f.title_en}</div>
+            </div>
+            <div class="bingo-instruction anim-item">
+              <div class="inst-zh">${f.instruction_zh}</div>
+              <div class="inst-en">${f.instruction_en}</div>
+            </div>
+            <div class="bingo-grid anim-item">
+              ${f.cells.map((cell, i) => `
+                <div class="bingo-cell" data-cell="${i}">
+                  <div class="cell-zh">${cell}</div>
+                  <div class="cell-en">${f.cells_en[i]}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (type === 'letter') {
+        return `
+          <div class="interactive-inner interactive-firebase interactive-letter">
+            <div class="bilingual-title anim-item">
+              <div class="title-zh">${f.title_zh}</div>
+              <div class="title-en">${f.title_en}</div>
+            </div>
+            <div class="firebase-question anim-item">
+              <div class="q-zh">${f.prompt_zh}</div>
+              <div class="q-en">${f.prompt_en}</div>
+            </div>
+            <div class="firebase-layout anim-item">
+              <div class="qr-block">
+                <div id="qr-letter"></div>
+                <div class="qr-label-zh">${f.qr_label_zh}</div>
+                <div class="qr-label-en">${f.qr_label_en}</div>
+              </div>
+              <div class="letter-wall" id="letter-wall"></div>
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="interactive-inner">
+            <div class="bilingual-title anim-item">
+              <div class="title-zh">${f.title_zh}</div>
+              <div class="title-en">${f.title_en}</div>
+            </div>
+            <div class="interactive-scenario anim-item">
+              <div class="scenario-zh">${f.scenario_zh}</div>
+              <div class="scenario-en">${f.scenario_en}</div>
+            </div>
+            <div class="interactive-tasks anim-item">
+              <div class="task-card task-left">
+                <div class="task-zh">${f.left_task_zh}</div>
+                <div class="task-en">${f.left_task_en}</div>
+              </div>
+              <div class="task-card task-right">
+                <div class="task-zh">${f.right_task_zh}</div>
+                <div class="task-en">${f.right_task_en}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderClosing(f) {
+      return `
+        <div class="closing-inner">
+          <div class="bilingual-title">
+            <div class="title-zh anim-item">${f.title_zh}</div>
+            <div class="title-en anim-item">${f.title_en}</div>
+          </div>
+          <div class="closing-divider anim-item"></div>
+          <div class="closing-tagline anim-item">
+            <div class="tag-zh">${f.tagline_zh}</div>
+            <div class="tag-en">${f.tagline_en}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSlideContent(slide) {
+      const f = slide.fields;
+      switch(slide.type) {
+        case 'cover':     return renderCover(f);
+        case 'toc':       return renderToc(f);
+        case 'chapter':   return renderChapter(f);
+        case 'quote':     return renderQuote(f);
+        case 'content':   return renderContent(f);
+        case 'compare':   return renderCompare(f);
+        case 'cards':     return renderCards(f);
+        case 'scripture': return renderScripture(f);
+        case 'stack':     return renderStack(f);
+        case 'table':     return renderTable(f);
+        case 'flow':      return renderFlow(f);
+        case 'diagram':   return renderDiagram(f);
+        case 'interactive': return renderInteractive(slide);
+        case 'closing':   return renderClosing(f);
+        default: return `<div>${JSON.stringify(f)}</div>`;
+      }
+    }
+
+    function renderSlides(slides) {
+      const container = document.getElementById('presentation');
+      slides.forEach((slide, idx) => {
+        const div = document.createElement('div');
+        div.className = `slide slide-${slide.type}${idx === 0 ? ' active' : ''}`;
+        div.dataset.idx = idx;
+        div.innerHTML = renderSlideContent(slide);
+        container.appendChild(div);
+      });
+    }
+
+    // ── 啟動：fetch content.json ──
+    fetch('content.json')
+      .then(r => r.json())
+      .then(data => {
+        window.PRESENTATION_META = data.meta;
+        renderSlides(data.slides);
+        document.dispatchEvent(new Event('slides-ready'));
+      })
+      .catch(err => {
+        document.getElementById('presentation').innerHTML =
+          '<div style="color:red;padding:2rem">Failed to load content.json: ' + err.message + '</div>';
+      });
+  </script>
+
+  <!-- Script 載入順序 -->
+  <script src="firebase-config.js"></script>
+  <script src="animation.js"></script>
+  <script src="navigation.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>
